@@ -1,10 +1,3 @@
-;; UI settings
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-(menu-bar-mode 0)
-(tool-bar-mode 0)
-(toggle-scroll-bar 0)
-
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -26,52 +19,51 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Ubuntu Mono" :foundry "DAMA" :slant normal :weight normal :height 165 :width normal)))))
 
-;; (add-to-list 'load-path "~/.emacs.d/lisp/")
-;; (load "~/.emacs.d/lisp/scons-mode")
+;; ==================== UI settings ==================== ;;
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(toggle-scroll-bar 0)
+
+;; ==================== Mode settings ==================== ;;
 (setq auto-mode-alist
       ;; for scons
       (cons '("SCons" . python-mode) auto-mode-alist))
 
+;; ==================== Elpy configuration ==================== ;;
 (require 'package)
 (add-to-list 'package-archives
              '("elpy" . "https://jorgenschaefer.github.io/packages/"))
 
 (package-initialize)
 (elpy-enable)
-
-;; To open recent files
-(require 'recentf)
-(recentf-mode 1)
-(global-set-key
- (kbd "C-c C-f") 'recentf-open-files)
-
-
-;; Key bindings for comments
-(global-set-key
- (kbd "C-c c") 'comment-region)
-(global-set-key
- (kbd "C-c u") 'uncomment-region)
-
-;; python3 configuration
 (setq elpy-rpc-python-command "python3")
 
-;; my custom settings
+
+;; ==================== Enable recent file mode ==================== ;;
+(require 'recentf)
+(recentf-mode 1)
+
+
+;; ==================== Custom Funtions ==================== ;;                    
 (add-hook 'text-mode-hook '(lambda ()
   (local-set-key (kbd "RET") 'electric-newline-and-maybe-indent)))
 (defun text-indent-mode ()
  ;;(setq-default indent-tabs-mode nil)
  (setq-default tab-width 4)
  (setq indent-line-function 'insert-tab))
+
+
+;; ==================== Hooks ==================== ;;
 (add-hook 'text-mode-hook 'text-indent-mode)
 (add-hook 'text-mode-hook 'flyspell-mode)
-(add-hook 'prog-mode-hook #'hs-minor-mode)
 (add-hook 'prog-mode-hook 'linum-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
+
+;; ==================== Key bindings ==================== ;;
 (global-set-key
- (kbd "C-c h") 'hs-hide-block)
+ (kbd "C-c C-f") 'recentf-open-files)
 (global-set-key
- (kbd "C-c s") 'hs-show-block)
+ (kbd "C-c c") 'comment-region)
 (global-set-key
- (kbd "C-c C-a h") 'hs-hide-all)
-(global-set-key
- (kbd "C-c C-a s") 'hs-show-all)
+ (kbd "C-c u") 'uncomment-region)
