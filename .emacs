@@ -19,16 +19,23 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Ubuntu Mono" :foundry "DAMA" :slant normal :weight normal :height 165 :width normal)))))
 
+
+;; ==================== Backup Settings ==================== ;;
+(setq backup-directory-alist `(("." . "~/.saves")))
+
+
 ;; ==================== UI settings ==================== ;;
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (toggle-scroll-bar 0)
 
+
 ;; ==================== Mode settings ==================== ;;
 (setq auto-mode-alist
       ;; for scons
       (cons '("SCons" . python-mode) auto-mode-alist))
+
 
 ;; ==================== Elpy configuration ==================== ;;
 (require 'package)
@@ -45,7 +52,7 @@
 (recentf-mode 1)
 
 
-;; ==================== Custom Funtions ==================== ;;                    
+;; ==================== Custom Funtions ==================== ;;
 (add-hook 'text-mode-hook '(lambda ()
   (local-set-key (kbd "RET") 'electric-newline-and-maybe-indent)))
 (defun text-indent-mode ()
