@@ -40,6 +40,8 @@
 ;; ==================== Elpy configuration ==================== ;;
 (require 'package)
 (add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
              '("elpy" . "https://jorgenschaefer.github.io/packages/"))
 
 (package-initialize)
@@ -53,19 +55,19 @@
 
 
 ;; ==================== Custom Funtions ==================== ;;
-(add-hook 'text-mode-hook '(lambda ()
-  (local-set-key (kbd "RET") 'electric-newline-and-maybe-indent)))
-(defun text-indent-mode ()
- ;;(setq-default indent-tabs-mode nil)
- (setq-default tab-width 4)
- (setq indent-line-function 'insert-tab))
+;; (defun text-indent-mode ()
+;;  ;;(setq-default indent-tabs-mode nil)
+;;  (setq-default tab-width 4)
+;;  (setq indent-line-function 'insert-tab))
 
 
 ;; ==================== Hooks ==================== ;;
-(add-hook 'text-mode-hook 'text-indent-mode)
-(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'text-mode-hook '(lambda ()
+  (local-set-key (kbd "RET") 'electric-newline-and-maybe-indent)))
 (add-hook 'prog-mode-hook 'linum-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
+(add-hook 'after-init-hook 'global-emojify-mode)
+
 
 ;; ==================== Key bindings ==================== ;;
 (global-set-key
