@@ -10,6 +10,7 @@
  '(column-number-mode t)
  '(custom-enabled-themes (quote (wheatgrass)))
  '(inhibit-startup-screen t)
+ '(package-selected-packages (quote (yaml-mode kivy-mode emojify elpy)))
  '(python-shell-interpreter "python3")
  '(tool-bar-mode nil))
 (custom-set-faces
@@ -28,6 +29,7 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (menu-bar-mode 0)
 (tool-bar-mode 0)
+(global-linum-mode 1)
 (toggle-scroll-bar 0)
 
 
@@ -62,10 +64,12 @@
 
 
 ;; ==================== Hooks ==================== ;;
-(add-hook 'text-mode-hook '(lambda ()
-  (local-set-key (kbd "RET") 'electric-newline-and-maybe-indent)))
-(add-hook 'prog-mode-hook 'linum-mode)
+;; (add-hook 'text-mode-hook '(lambda ()
+;;   (local-set-key (kbd "RET") 'electric-newline-and-maybe-indent)))
+;; (add-hook 'prog-mode-hook 'linum-mode)
+;; (add-hook 'text-mode-hook 'linum-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
+(add-hook 'prog-mode-hook 'electric-pair-mode)
 (add-hook 'after-init-hook 'global-emojify-mode)
 
 
@@ -76,3 +80,5 @@
  (kbd "C-c c") 'comment-region)
 (global-set-key
  (kbd "C-c u") 'uncomment-region)
+(global-set-key
+ (kbd "C-c k") (kbd "C-u 0 C-k"))
