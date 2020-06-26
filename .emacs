@@ -10,7 +10,7 @@
  '(column-number-mode t)
  '(custom-enabled-themes (quote (wheatgrass)))
  '(inhibit-startup-screen t)
- '(package-selected-packages (quote (yaml-mode kivy-mode emojify elpy)))
+ '(package-selected-packages (quote (flymake-json yaml-mode kivy-mode emojify elpy)))
  '(python-shell-interpreter "python3")
  '(tool-bar-mode nil))
 (custom-set-faces
@@ -61,6 +61,11 @@
 ;;  ;;(setq-default indent-tabs-mode nil)
 ;;  (setq-default tab-width 4)
 ;;  (setq indent-line-function 'insert-tab))
+(add-hook 'comint-mode-hook
+          (defun rm-comint-postoutput-scroll-to-bottom ()
+            (remove-hook 'comint-output-filter-functions
+                         'comint-postoutput-scroll-to-bottom)))
+(setq-default c-basic-offset 8)
 
 
 ;; ==================== Hooks ==================== ;;
@@ -69,8 +74,10 @@
 ;; (add-hook 'prog-mode-hook 'linum-mode)
 ;; (add-hook 'text-mode-hook 'linum-mode)
 (add-hook 'prog-mode-hook 'show-paren-mode)
+(add-hook 'js-mode-hook 'flymake-json-maybe-load)
 (add-hook 'prog-mode-hook 'electric-pair-mode)
 (add-hook 'after-init-hook 'global-emojify-mode)
+(add-hook 'prog-mode-hook 'hs-minor-mode)
 
 
 ;; ==================== Key bindings ==================== ;;
@@ -82,3 +89,7 @@
  (kbd "C-c u") 'uncomment-region)
 (global-set-key
  (kbd "C-c k") (kbd "C-u 0 C-k"))
+(global-set-key
+ (kbd "C-c h") 'hs-hide-block)
+(global-set-key
+ (kbd "C-c s") 'hs-show-block)
